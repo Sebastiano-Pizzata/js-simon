@@ -12,6 +12,8 @@
 const istruzioni = document.getElementById("instructions")
 const lista = document.getElementById("numbers-list")
 const form = document.querySelector(".d-none")
+
+const messaggio = document.getElementById("message")
 let numbers = []
 
 for (let i = 0; i < 5; i++) {
@@ -23,7 +25,7 @@ lista.innerHTML = numbers;
 
 // timer
 const countdown = document.getElementById("countdown")
-let counter = 30
+let counter = 10
 
 const setTimer = setInterval( cloack, 1000 );
 
@@ -31,11 +33,15 @@ function cloack(){
     countdown.innerHTML = counter--
     if(counter === 0){
         clearInterval(setTimer)
-        countdown.innerHTML = "Si inzia";
-        istruzioni.remove();
+        istruzioni.remove("Memorizza i numeri entro il tempo limite!");
         lista.remove();
         countdown.remove();
+        form.classList.remove ("d-none");
+        form.classList.add ("d-block");
     } 
 }
+
+
+const input = document.querySelectorAll("form-control")
 
 
