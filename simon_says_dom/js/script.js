@@ -8,40 +8,67 @@
 // non è importante l'ordine con cui l'utente inserisce i numeri, basta che ne indovini il più possibile.
 
 
-// numeri random
 const istruzioni = document.getElementById("instructions")
 const lista = document.getElementById("numbers-list")
 const form = document.querySelector(".d-none")
 
 const messaggio = document.getElementById("message")
-let numbers = []
+const numbers = []
 
-for (let i = 0; i < 5; i++) {
-    numbers.push(Math.floor((Math.random() * 50) + 1));
+function randomNumbers(min,max){
+       return Math.floor(Math.random() * max) + min;
+}
+
+ for (let i = 0; numbers.length < 5; i++) {
+
+    let numeroRandom = randomNumbers(1,50)
+
+    if(!(numbers.includes(numeroRandom))){
+        numbers.push(numeroRandom)
+    }
+    console.log(numbers)
  }
 
-lista.innerHTML = numbers;
+
+ for (let i = 0; i < numbers.length; i++) {
+    lista.innerHTML += `<li>${numbers[i]}</li>`;
+ }
+
 
 
 // timer
 const countdown = document.getElementById("countdown")
-let counter = 10
+let counter = 5
 
 const setTimer = setInterval( cloack, 1000 );
 
 function cloack(){
     countdown.innerHTML = counter--
-    if(counter === 0){
+    if(counter < 0){
         clearInterval(setTimer)
-        istruzioni.remove("Memorizza i numeri entro il tempo limite!");
-        lista.remove();
-        countdown.remove();
+        istruzioni.classList.add("d-none");
         form.classList.remove ("d-none");
-        form.classList.add ("d-block");
+        lista.classList.add("d-none")
     } 
 }
 
+// button
+const btn = document.querySelector(".btn-primary");
+const inputs = document.querySelectorAll(".form-control")
+const arrayUtente = [];
 
-const input = document.querySelectorAll("form-control")
+btn.addEventListener("click", function(event){
+        event.preventDefault()
+        for(let i = 0; i < inputs.length; i++){
+                if(numbers.includes(parseInt(inputs[i].value))){
+                    arrayUtente.push(inputs[i].value)
+                }
+        }
+        messaggio.innerHTML = `Complimenti hai indovinato : ${arrayUtente.length} e sono ${arrayUtente.join("-")}`
+
+        console.log(arrayUtente)
+})
+
+
 
 
