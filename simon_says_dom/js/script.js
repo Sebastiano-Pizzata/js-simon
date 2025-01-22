@@ -38,7 +38,7 @@ function randomNumbers(min,max){
 
 // timer
 const countdown = document.getElementById("countdown")
-let counter = 5
+let counter = 30
 
 const setTimer = setInterval( cloack, 1000 );
 
